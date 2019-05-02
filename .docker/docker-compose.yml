@@ -4,12 +4,12 @@ services:
   api:
     build:
       context: ../
-      dockerfile: .docker/Dockerfile
+      dockerfile: .docker/api/Dockerfile
     image: docker-lumen
     ports:
       - 8080:80
     volumes:
-      - ./../backend:/var/www/app
+      - ./../backend:/var/www/api
     links:
       - mysql
       - redis
@@ -22,6 +22,17 @@ services:
       REDIS_HOST: redis
       SESSION_DRIVER: redis
       CACHE_DRIVER: redis
+    networks:
+      - app-network
+  app:
+    ports:
+      - 4200:3000
+    image: docker-angularjs
+    volumes:
+      - ./../frontend:/var/www/app
+    build:
+      context: ../
+      dockerfile: .docker/app/Dockerfile
     networks:
       - app-network
 
