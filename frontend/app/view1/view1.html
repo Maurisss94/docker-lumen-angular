@@ -1,29 +1,33 @@
 <section class="section">
-    <h1>This is the partial for view 1.</h1>
-    <h3>{{name}}</h3>
+    <h1>LIST OF PHONES <sub><span class="subtitle is-6">{{view.name}}</span></sub></h1>
+
     <br>
     <div class="columns">
         <div class="column is-6">
-            Search: <input ng-model="View1Ctrl.query" class="input"/>
+            Search: <input ng-model="view.query" class="input"/>
         </div>
         <div class="column is-6">
             Sort by: <br>
             <div class="select">
-                <select ng-model="View1Ctrl.orderProp">
+                <select ng-model="view.orderProp">
                     <option value="name">Alphabetical</option>
                     <option value="age">Newest</option>
                 </select>
             </div>
         </div>
     </div>
-    <div class="column is-full box" ng-controller="View1Ctrl">
+    <div class="column is-full box">
         <aside class="menu">
             <ul class="menu-list">
                 <p class="menu-label">
                     PHONES
                 </p>
-                <li ng-repeat="phone in phones | filter:View1Ctrl.query | orderBy:View1Ctrl.orderProp">
-                    <a>{{phone.name}}</a>
+                <li ng-repeat="phone in view.phones | filter:view.query | orderBy:view.orderProp">
+                    <a>{{phone.name}}
+                        <figure class="image is-64x64">
+                            <img ng-src="{{phone.imageUrl}}">
+                        </figure>
+                    </a>
                 </li>
             </ul>
         </aside>
